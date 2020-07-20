@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Facturas</title>
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+  <!-- SheetJs -->
+  <script lang=javascritp src="xlsx.full.min.js"></script>
+  <!-- FileSaver -->
+  <script lang=javascritp src="FileSaver.min.js"></script>
+  
+  <!-- Link to BOOTSTRAP. -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Optional Bootstrap JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+  <!-- Metatag to start setting resposiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <!-- link to CSS. -->
+  <link rel="stylesheet" href="index.css">
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+  <!-- Moment.js Reference -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+  <!-- Numberal.js Reference -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ==================================================== JUMBOTRON -->
+
+  <div class="jumbotron jumbotron-fluid bg-dark text-light">
+    <h3 id="mainHeader" class="text-center">LECTOR WEB DE FACTURAS XML</h3>
+  </div>
+
+
+  <div class="container">
+
+    <!-- ==================================================== TABLE TITLE -->
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card card-default">
+          <div id="mainDescription" class="card-header">
+            <h5 >DESCRIPCIÓN DE FACTURAS</h5>
+            <h5 >PRUEBA DESCRIPCIÓN DE FACTURAS</h5>
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="pickedFile" aria-describedby="inputGroupFileAddon01"
+                  multiple="multiple">
+                <label class="custom-file-label" for="pickedFile">Seleccionar archivo(s)</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==================================================== TABLE -->
+
+          <div class="card-body tableDiv">
+            <table id="tableRow" class="table">
+              <thead>
+                <tr>
+                  <th id="categoría" scope="col">Categoría</th>
+                  <th id="detalle" scope="col">Detalle</th>
+                  <th id="conceptoGeneral" scope="col">Concepto general</th>
+                  <th id="deducible" scope="col">Deducible</th>
+                  <th id="periodoGeductibilidad" scope="col">Periodo de deductibilidad</th>
+                  <th id="bienesServicios" scope="col">De bienes o servicios</th>
+                  <th id="seTieneFactura" scope="col">Se tiene factura original</th>
+                  <th id="proveedor" scope="col">Proveedor</th>
+                  <th id="RFC" scope="col">RFC</th>
+                  <th id="fecha" scope="col">Fecha</th>
+                  <th id="folioFiscal" scope="col">Folio fiscal</th>
+                  <th id="máximoDeducible" scope="col">% Máximo deducible</th>
+                  <th id="total" scope="col">Total</th>
+                  <th id="IVA" scope="col">IVA</th>
+                  <th id="impuestosTrasladados" scope="col">Impuestos totales trasladados</th>
+                  <th id="montoBaseIVA" scope="col">Monto base de IVA</th>
+                  <th id="montoSinIVA" scope="col">Monto sin IVA</th>
+                  <th id="montoAntesImpuestos" scope="col">Monto antes de Impuestos</th>
+                  <th id="montoIVA0" scope="col">Monto IVA 0%</th>
+                  <th id="otrosImpuestos" scope="col">Otros impuestos</th>
+                  <th id="montoMaximoBaseIVA" scope="col">Monto máximo base de IVA </th>
+                  <th id="montoMaximoSinIVA" scope="col">Monto máximo sin IVA</th>
+                  <th id="IVAmáximoTrasladado" scope="col">IVA máximo trasladado</th>
+                  <th id="TotalMáximo" scope="col">Total máximo</th>
+                  <th id="MétodoPago" scope="col">Método de pago</th>
+                  <th id="Notas" scope="col">Notas</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <!-- <h5>Prueba</h5>> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="genExcl" class="btn btn-dark">Generar Excel</button>
+
+</body>
+
+<!-- Robust JQuery version -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Link to Javascript file -->
+<script type="text/javascript" src="javascript.js"></script>
+
+</html>
