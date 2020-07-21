@@ -1,12 +1,39 @@
 // ===================================================================== XMLAPI and DOMParser
 
+var fileCounter = 0;
+var filesOrigin = "";
+var recFiles = null;
+var satFiles = null;
+
 function grabElements() {
-  dataArea = document.getElementById("dataHolder");
-  var files = document.getElementById("pickedFile");
-  files.addEventListener("change", process, false);
+ 
+// dataArea = document.getElementById("dataHolder");
+  satFiles = document.getElementById("satFiles");
+  // satFiles.addEventListener("click", readFiles("sat"));
+
+  recFiles = document.getElementById("recFiles");
+  // recFiles.addEventListener("click", readFiles("rec"));
+
 }
 
-var fileCounter = 0;
+function readFiles(fileOrigin) {
+
+    if (fileOrigin == "sat") {
+
+      filesOrigin = "#satTableBody"
+      console.log(filesOrigin)
+
+      satFiles.addEventListener("change", process, false);
+
+    } else if (fileOrigin == "rec") {
+
+      filesOrigin = "#recTableBody"
+      console.log(filesOrigin)    
+      recFiles.addEventListener("change", process, false);
+
+    }
+
+}
 
 function process(element) {
   // Assign "files" the selected file in the input file selector.
@@ -176,8 +203,8 @@ function findXMLElements(element) {
       montoBaseIVA = montoAntesImp;
     } else {
       montoBaseIVA = totalIVA / 0.16;
-      console.log(totalIVA);
-      console.log(montoBaseIVA);
+      // console.log(totalIVA);
+      // console.log(montoBaseIVA);
     }
 
     if (totalComprobante == 0 || !totalComprobante) {
@@ -210,76 +237,24 @@ function findXMLElements(element) {
     otrosImp = parseFloat(0);
   }
 
-  $("#tableBody").append(
+  // var whichTable = "";
+
+  // if (filesOrigin = "sat") {
+
+  //   whichTable = "#satTableBody"
+
+  // } else {
+
+  //   whichTable = "#recTableBody"
+
+  // }
+
+  // console.log (whichTable)
+
+  $(filesOrigin).append(
     "<tr id='rowNumber" +
       fileCounter +
       "'>" +
-      "<td style='padding:0px'>" +
-      // "<div class='input-group mb-3'>" +
-      // "<select class='custom-select'" +
-      // "id='" + fileCounter + "-inputGroupSelect01'>" +
-      // "<option selected>Seleccionar</option>" +
-      // "<option value='AUTOMOVIL'>AUTOMÓVIL</option>" +
-      // "<option value='ELECTRONICOS'>ELECTRÓNICOS</option>" +
-      // "<option value='GASOLINA'>GASOLINA</option>" +
-      // "<option value='OFICINA'>OFICINA</option>" +
-      // "<option value='OBRA'>OBRA</option>" +
-      // "<option value='GASTOS_MEDICOS'>GASTOS MÉDICOS</option>" +
-      // "<option value='REPRESENTACION'>REPRESENTACIÓN</option>" +
-      // "<option value='SEGUROS'>SEGUROS</option>" +
-      // "<option value='CONSUMOS'>CONSUMOS</option>" +
-      // "<option value='PAQUETERIA'>PAQUETERÍA</option>" +
-      // "<option value='INTERESES'>INTERESES</option>" +
-      // "<option value='VIATICOS'>VIÁTICOS</option>" +
-      // "<option value='SOFTWARE'>SOFTWARE</option>" +
-      // "<option value='TELEFONIA'>TELEFONÍA</option>" +
-      // "<option value='DIVERSOS'>DIVERSOS</option>" +
-      // "</select>" +
-      // "</div>" +
-      "</td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td style='padding:0px'>" +
-      // "<div class='input-group mb-3'>" +
-      // "<select class='custom-select'" +
-      // "id='" + fileCounter + "-inputGroupSelect02'>" +
-      // "<option selected value='SI'>SÍ</option>" +
-      // "<option value='NO'>NO</option>" +
-      // "</select>" +
-      // "</div>" +
-      "</td>" +
-      "<td style='padding:0px'>" +
-      // "<div class='input-group mb-3'>" +
-      // "<select class='custom-select'" +
-      // "id='" + fileCounter + "-inputGroupSelect03'>" +
-      // "<option selected>Seleccionar</option>" +
-      // "<option value='MENSUAL'>MENSUAL</option>" +
-      // "<option value='ANUAL'>ANUAL</option>" +
-      // "<option value='POR_DEPRECIACION'>POR DEPRECIACIÓN</option>" +
-      // "<option value='NINGUNO'>NINGUNO</option>" +
-      // "</select>" +
-      // "</div>" +
-      "</td>" +
-      "<td style='padding:0px'>" +
-      // "<div class='input-group mb-3'>" +
-      // "<select class='custom-select'" +
-      // "id='" + fileCounter + "-inputGroupSelect04'>" +
-      // "<option selected>Seleccionar</option>" +
-      // "<option value='BIENES'>BIENES</option>" +
-      // "<option value='SERVICIOS'>SERVICIOS</option>" +
-      // "</select>" +
-      // "</div>" +
-      "</td>" +
-      "<td style='padding:0px'>" +
-      // "<div class='input-group mb-3'>" +
-      // "<select class='custom-select'" +
-      // "id='" + fileCounter + "-inputGroupSelect05'>" +
-      // "<option selected>Seleccionar</option>" +
-      // "<option value='SI'>SÍ</option>" +
-      // "<option value='NO'>NO</option>" +
-      // "</select>" +
-      // "</div>" +
-      "</td>" +
       "<td>" +
       nombreEmisor +
       "</td>" +
@@ -292,43 +267,12 @@ function findXMLElements(element) {
       "<td>" +
       claveCFDI +
       "</td>" +
-      "<td style='padding:0px'>" +
-      // "<div class='input-group mb-3'>" +
-      // "<input type='text' class='form-control' " +
-      // "id='" + fileCounter + "-inputGroupSelect06' " +
-      // "ref='' " +
-      // "aria-label='%Deductible'> " +
-      // "<div class='input-group-append'>" +
-      // "<span class='input-group-text'>%</span>" +
-      // "</div>" +
-      // "</div>" +
-      "</td>" +
       "<td>" +
       formatCurrency(totalComprobante) +
       "</td>" +
       "<td>" +
       formatCurrency(totalIVA) +
       "</td>" +
-      "<td>" +
-      formatCurrency(totalImpTrasImpuestos) +
-      "</td>" +
-      // "<td>" + formatCurrency(montoBaseIVA) + "</td>" +
-      "<td></td>" +
-      // "<td>" + formatCurrency(montoSinIVA) + "</td>" +
-      // "<td>" + formatCurrency(montoAntesImp) + "</td>" +
-      // "<td>" + formatCurrency(montoIVA0) + "</td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td>" +
-      formaPagoComprobante +
-      "</td>" +
-      "<td></td>" +
       "</tr>"
   );
 
@@ -360,6 +304,7 @@ function s2ab(s) {
   for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
   return buf;
 }
+
 $("#genExcl").click(function() {
   var wb = XLSX.utils.table_to_book(document.getElementById("tableRow"), {
     sheet: "Sheet JS"

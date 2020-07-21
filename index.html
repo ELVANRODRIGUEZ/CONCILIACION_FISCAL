@@ -50,31 +50,46 @@
   <!-- ==================================================== JUMBOTRON -->
 
   <div class="jumbotron jumbotron-fluid bg-dark text-light">
-    <h3 id="mainHeader" class="text-center">LECTOR WEB DE FACTURAS XML</h3>
+    <h3 id="mainHeader" class="text-center">CONCILIACION FISCAL</h3>
   </div>
 
 
   <div class="container">
 
     <!-- ==================================================== TABLE TITLE -->
-
+    
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-5">
         <div class="card card-default">
           <div id="mainDescription" class="card-header">
-            <h5 >DESCRIPCIÓN DE FACTURAS</h5>
-            <h5 >PRUEBA DESCRIPCIÓN DE FACTURAS</h5>
+            <h5 >FACTURAS SAT</h5>
             <div class="input-group mb-3">
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="pickedFile" aria-describedby="inputGroupFileAddon01"
+                <input type="file" onclick="readFiles('sat')"  class="custom-file-input" id="satFiles" aria-describedby="inputGroupFileAddon01"
                   multiple="multiple">
-                <label class="custom-file-label" for="pickedFile">Seleccionar archivo(s)</label>
+                <label class="custom-file-label" for="satFiles">Ingresar facturas descargadas del SAT</label>
               </div>
             </div>
           </div>
-
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card card-default">
+          <div id="mainDescription2" class="card-header">
+            <h5 >FACTURAS RECIBIDAS</h5>
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" onclick="readFiles('rec')" class="custom-file-input" id="recFiles" aria-describedby="inputGroupFileAddon01"
+                  multiple="multiple">
+                <label class="custom-file-label" for="recFiles">Ingresar facturas recibidas</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
           <!-- ==================================================== TABLE -->
-
+<!--
           <div class="card-body tableDiv">
             <table id="tableRow" class="table">
               <thead>
@@ -108,10 +123,46 @@
                 </tr>
               </thead>
               <tbody id="tableBody">
-                <!-- <h5>Prueba</h5>> -->
               </tbody>
             </table>
           </div>
+-->
+
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="card-body tableDiv">
+          <table id="tableRow" class="table">
+            <thead>
+              <tr>
+                <th id="proveedor" scope="col">Proveedor</th>
+                <th id="RFC" scope="col">RFC</th>
+                <th id="fecha" scope="col">Fecha</th>
+                <th id="folioFiscal" scope="col">Folio fiscal</th>
+                <th id="total" scope="col">Total</th>
+                <th id="IVA" scope="col">IVA</th>
+              </tr>
+            </thead>
+            <tbody id="satTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card-body tableDiv">
+          <table id="tableRow" class="table">
+            <thead>
+              <tr>
+                <th id="proveedor" scope="col">Proveedor</th>
+                <th id="RFC" scope="col">RFC</th>
+                <th id="fecha" scope="col">Fecha</th>
+                <th id="folioFiscal" scope="col">Folio fiscal</th>
+                <th id="total" scope="col">Total</th>
+                <th id="IVA" scope="col">IVA</th>
+              </tr>
+            </thead>
+            <tbody id="recTableBody">
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
